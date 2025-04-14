@@ -1,0 +1,83 @@
+import random
+#The_Number = random.randint(1, 20)
+#print(The_Number)
+Vanskelighetsgrad ={
+"easy" : 20,
+"normal" : 50,
+"hard" : 100,
+"impossible" : 1000,
+}
+while True:
+   difficulty = input("please choose a dificulty: Easy, Normal, Hard or impossible: ").lower()
+   if difficulty in Vanskelighetsgrad:
+      Top_Number = Vanskelighetsgrad[difficulty]
+      break
+   else:
+      print(f"sorry but {difficulty} is not  difficluty")
+
+
+attempts = 1
+New_Round = True
+ 
+while(New_Round):
+   The_Number = random.randint(1, Top_Number)
+   print(The_Number)
+   attempts = 1
+
+   #skjekker at det er et tall
+   while True:
+      User_input = input("guess the number")
+      try :
+         guess= int(User_input)
+         break
+      except ValueError:
+         print(f"sorry we only accept numbers here, not letters and {User_input} is not a number")
+      
+      #Hoved del for å gjette tallet (med hint)
+   while guess != The_Number:  
+      print("not right")
+
+      #Hint
+      if guess > The_Number:
+        print("The number is smaller")
+      elif guess < The_Number:
+         print("The number is bigger")
+        
+       
+      #Spår om et nytt tall s
+      while True: 
+         User_input = input("guess again")
+         try :
+            guess= int(User_input)
+            break
+         except ValueError:
+            print(f"sorry we only accept numbers here, not letters and {User_input} is not a number")
+        
+         
+      attempts = attempts +1
+   
+   
+   #Når man gjetter riktig
+   print(f"That is correct,{The_Number} is the answer. you used {attempts} attempt{'s' if attempts != 1 else ''}!")
+
+
+   # om man vil spille igjen
+   while True:
+      Restar_Game = input("If you would like to play again please type yes: ").lower()
+      if Restar_Game in ["yes", "sure", "i would love to", "okay", "ok", "y" ] :
+         print("This works. Generating a new number")
+         The_Number = random.randint(1, 20)
+         New_Round = True
+         break
+ 
+      elif Restar_Game in ["no", "n", "quit"]:
+         print("Okay, goodbye User")
+         New_Round = False
+         break
+
+      else:
+         print("Sorry I did't understand you please type [y/n]")
+
+   
+
+
